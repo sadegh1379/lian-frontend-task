@@ -29,7 +29,7 @@ export function buildCreatedUser(id: number, input: CreateUserInput): User {
   return {
     id,
     name: input.name,
-    username: input.username,
+    username: "",
     email: input.email,
     phone: "",
     website: "",
@@ -41,7 +41,7 @@ export function buildCreatedUser(id: number, input: CreateUserInput): User {
       geo: { lat: "", lng: "" },
     },
     company: {
-      name: "",
+      name: input.companyName,
       catchPhrase: "",
       bs: "",
     },
@@ -58,8 +58,8 @@ export function queryUsers(
   const filtered = normalizedQuery
     ? users.filter((user) => {
         const nameMatches = user.name.toLowerCase().includes(normalizedQuery)
-        const idMatches = String(user.id).includes(normalizedQuery)
-        return nameMatches || idMatches
+        const emailMatches = user.email.toLowerCase().includes(normalizedQuery)
+        return nameMatches || emailMatches
       })
     : [...users]
 

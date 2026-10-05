@@ -65,7 +65,7 @@ export function UsersNoResults({ query, onClear }: UsersNoResultsProps) {
         </div>
         <CardTitle>No matching users</CardTitle>
         <CardDescription>
-          Nothing matches “{query.trim()}”. Try another name or user ID.
+          Nothing matches “{query.trim()}”. Try another name or email.
         </CardDescription>
         <Button type="button" variant="outline" onClick={onClear}>
           Clear search

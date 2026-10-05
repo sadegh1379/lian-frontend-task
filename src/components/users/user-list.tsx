@@ -1,6 +1,5 @@
 import { Trash2Icon } from "lucide-react"
 
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -50,12 +49,14 @@ export function UserList({ users, disabled, onDelete }: UserListProps) {
             </CardHeader>
             <CardContent className="flex flex-col gap-2 text-sm">
               <div className="flex items-center justify-between gap-3">
-                <span className="text-muted-foreground">User ID</span>
-                <Badge variant="secondary">{user.id}</Badge>
+                <span className="text-muted-foreground">Email</span>
+                <span className="truncate font-medium">{user.email || "—"}</span>
               </div>
               <div className="flex items-center justify-between gap-3">
-                <span className="text-muted-foreground">Username</span>
-                <span className="truncate font-medium">{user.username}</span>
+                <span className="text-muted-foreground">Company</span>
+                <span className="truncate font-medium">
+                  {user.company.name || "—"}
+                </span>
               </div>
             </CardContent>
           </Card>
@@ -66,8 +67,8 @@ export function UserList({ users, disabled, onDelete }: UserListProps) {
           <TableHeader>
             <TableRow>
               <TableHead className="px-4">Name</TableHead>
-              <TableHead className="px-4">User ID</TableHead>
-              <TableHead className="px-4">Username</TableHead>
+              <TableHead className="px-4">Email</TableHead>
+              <TableHead className="px-4">Company</TableHead>
               <TableHead className="px-4 text-right">
                 <span className="sr-only">Actions</span>
               </TableHead>
@@ -79,11 +80,11 @@ export function UserList({ users, disabled, onDelete }: UserListProps) {
                 <TableCell className="max-w-xs px-4 font-medium">
                   <span className="block truncate">{user.name}</span>
                 </TableCell>
-                <TableCell className="px-4">
-                  <Badge variant="secondary">{user.id}</Badge>
+                <TableCell className="max-w-xs px-4">
+                  <span className="block truncate">{user.email || "—"}</span>
                 </TableCell>
                 <TableCell className="max-w-xs px-4">
-                  <span className="block truncate">{user.username}</span>
+                  <span className="block truncate">{user.company.name || "—"}</span>
                 </TableCell>
                 <TableCell className="px-4 text-right">
                   <Button

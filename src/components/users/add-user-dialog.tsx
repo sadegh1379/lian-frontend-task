@@ -36,8 +36,8 @@ type AddUserDialogProps = {
 
 const emptyUser: CreateUserInput = {
   name: "",
-  username: "",
   email: "",
+  companyName: "",
 }
 
 export function AddUserDialog({ disabled, onAdd }: AddUserDialogProps) {
@@ -109,23 +109,6 @@ export function AddUserDialog({ disabled, onAdd }: AddUserDialogProps) {
             />
             <FormField
               control={form.control}
-              name="username"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Username</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      autoComplete="username"
-                      placeholder="Bret"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
               name="email"
               render={({ field }) => (
                 <FormItem>
@@ -136,6 +119,23 @@ export function AddUserDialog({ disabled, onAdd }: AddUserDialogProps) {
                       type="email"
                       autoComplete="email"
                       placeholder="leanne@example.com"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="companyName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Company name</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      autoComplete="organization"
+                      placeholder="Romaguera-Crona"
                     />
                   </FormControl>
                   <FormMessage />

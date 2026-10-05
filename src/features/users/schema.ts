@@ -37,15 +37,11 @@ export const createUserSchema = z.object({
     .string()
     .trim()
     .min(2, "Name must be at least 2 characters."),
-  username: z
+  email: z.email("Enter a valid email address."),
+  companyName: z
     .string()
     .trim()
-    .min(2, "Username must be at least 2 characters.")
-    .regex(
-      /^[a-zA-Z0-9._-]+$/,
-      "Use letters, numbers, dots, dashes, or underscores.",
-    ),
-  email: z.email("Enter a valid email address."),
+    .min(2, "Company name must be at least 2 characters."),
 })
 
 export const userMutationsSchema = z.object({

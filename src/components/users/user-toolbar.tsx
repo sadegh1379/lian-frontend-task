@@ -63,8 +63,8 @@ export function UserToolbar({
             onChange={(event) => {
               onQueryChange(event.target.value)
             }}
-            placeholder="Search by name or user ID"
-            aria-label="Search by name or user ID"
+            placeholder="Search by name or email"
+            aria-label="Search by name or email"
             className="pr-8 pl-8"
           />
           {query ? (

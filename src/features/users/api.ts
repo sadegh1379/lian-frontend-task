@@ -46,7 +46,11 @@ export async function createUserRequest(input: CreateUserInput): Promise<void> {
   const response = await request(usersEndpoint, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(input),
+    body: JSON.stringify({
+      name: input.name,
+      email: input.email,
+      company: { name: input.companyName },
+    }),
   })
 
   if (!response.ok) {
