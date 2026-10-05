@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 
 import { Toaster } from "@/components/ui/sonner"
 import { DashboardPage } from "@/pages/dashboard-page"
+import { UserDetailPage } from "@/pages/user-detail-page"
 import { queryClient } from "@/lib/query-client"
 
 export function App() {
@@ -11,6 +12,7 @@ export function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<DashboardPage />} />
+          <Route path="/users/:id" element={<UserDetailPage />} />
         </Routes>
         <Toaster />
       </BrowserRouter>

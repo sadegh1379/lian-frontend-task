@@ -1,4 +1,5 @@
 import { Trash2Icon } from "lucide-react"
+import { Link } from "react-router-dom"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -32,7 +33,10 @@ export function UserList({ users, disabled, onDelete }: UserListProps) {
           <Card key={user.id} size="sm">
             <CardHeader>
               <CardTitle className="truncate">{user.name}</CardTitle>
-              <CardAction>
+              <CardAction className="flex gap-1">
+                <Button variant="outline" size="sm" asChild>
+                  <Link to={`/users/${user.id}`}>Details</Link>
+                </Button>
                 <Button
                   type="button"
                   variant="destructive"
@@ -87,19 +91,24 @@ export function UserList({ users, disabled, onDelete }: UserListProps) {
                   <span className="block truncate">{user.company.name || "—"}</span>
                 </TableCell>
                 <TableCell className="px-4 text-right">
-                  <Button
-                    type="button"
-                    variant="destructive"
-                    size="sm"
-                    disabled={disabled}
-                    aria-label={`Delete ${user.name}`}
-                    onClick={() => {
-                      onDelete(user)
-                    }}
-                  >
-                    <Trash2Icon />
-                    Delete
-                  </Button>
+                  <div className="flex justify-end gap-2">
+                    <Button variant="outline" size="sm" asChild>
+                      <Link to={`/users/${user.id}`}>Details</Link>
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="destructive"
+                      size="sm"
+                      disabled={disabled}
+                      aria-label={`Delete ${user.name}`}
+                      onClick={() => {
+                        onDelete(user)
+                      }}
+                    >
+                      <Trash2Icon />
+                      Delete
+                    </Button>
+                  </div>
                 </TableCell>
               </TableRow>
             ))}

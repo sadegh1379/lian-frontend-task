@@ -1,4 +1,9 @@
-import { userListSchema, type CreateUserInput, type User } from "@/features/users/schema"
+import {
+  userListSchema,
+  userSchema,
+  type CreateUserInput,
+  type User,
+} from "@/features/users/schema"
 
 const usersEndpoint = "https://jsonplaceholder.typicode.com/users"
 
@@ -37,6 +42,27 @@ export async function fetchUsers(signal?: AbortSignal): Promise<User[]> {
 
   if (!parsed.success) {
     throw new ApiError("The user list from the server was not valid.")
+  }
+
+  return parsed.data
+}
+
+export async function fetchUser(id: number, signal?: AbortSignal): Promise<User> {
+  const response = await request(`${usersEndpoint}/${id}`, { signal })
+
+  if (response.status === 404) {
+    throw new ApiError("This user could not be found.")
+  }
+
+  if (!response.ok) {
+    throw new ApiError("Could not load this user. Try again.")
+  }
+
+  const payload: unknown = await response.json()
+  const parsed = userSchema.safeParse(payload)
+
+  if (!parsed.success) {
+    throw new ApiError("This user could not be found.")
   }
 
   return parsed.data

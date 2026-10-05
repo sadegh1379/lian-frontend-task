@@ -11,6 +11,7 @@ The dashboard lists three fields for every user: name, email, and company name. 
 - Search by name or email. Matching is case-insensitive and happens on the list already loaded in the browser.
 - Sort by user ID, name, or username, in ascending or descending order. The default is user ID, ascending.
 - Add a user. The form asks for name, email, and company name, and checks them with React Hook Form and Zod before anything is sent.
+- Open a user's details. The page loads that person from `GET /users/{id}` and shows name, username, email, phone, address, and company name. It has its own loading and error states, and a link back to the list. A user created in this browser is read from local storage, because the API does not keep that record.
 - Delete a user after a confirmation dialog. A user that came from the API is deleted remotely and remembered as removed. A user created in this browser is removed from local storage only, because that record does not exist on the server.
 
 New users get the next free numeric ID. Deleted server IDs are not reused, so a removed person does not reappear when the list is fetched again.
@@ -69,6 +70,7 @@ src/
   App.tsx                  # routing and QueryClientProvider
   pages/
     dashboard-page.tsx     # dashboard page: search, sort, and screen states
+    user-detail-page.tsx   # one user: loading, error, and a link back to the list
   components/
     ui/                    # shadcn/ui components
     users/                 # toolbar, list, dialogs, skeleton, empty and error views
@@ -76,6 +78,8 @@ src/
     api.ts                 # fetch, create, and delete requests
     schema.ts              # user model and Zod validation
     use-users.ts           # TanStack Query reads and mutations
+    use-user.ts            # load one user by id
+    format-address.ts      # readable address line
     directory.ts           # merge remote users with local edits, then search and sort
     storage.ts             # read and write added and deleted users in localStorage
     query-keys.ts          # query keys for the remote list and local edits
