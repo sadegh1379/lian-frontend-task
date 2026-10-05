@@ -20,7 +20,7 @@ export function DashboardPage() {
   const { status, errorMessage, users, isMutating, reload, addUser, removeUser } =
     useUsers()
   const [query, setQuery] = useState("")
-  const [sortField, setSortField] = useState<SortField>("id")
+  const [sortField, setSortField] = useState<SortField>("name")
   const [sortDirection, setSortDirection] = useState<SortDirection>("asc")
   const [userToDelete, setUserToDelete] = useState<User | null>(null)
 
@@ -30,6 +30,16 @@ export function DashboardPage() {
   )
 
   const hasQuery = query.trim().length > 0
+
+  function handleSort(field: SortField) {
+    if (field === sortField) {
+      setSortDirection((direction) => (direction === "asc" ? "desc" : "asc"))
+      return
+    }
+
+    setSortField(field)
+    setSortDirection("asc")
+  }
 
   return (
     <div className="min-h-svh bg-background">
@@ -53,10 +63,6 @@ export function DashboardPage() {
         <UserToolbar
           query={query}
           onQueryChange={setQuery}
-          sortField={sortField}
-          onSortFieldChange={setSortField}
-          sortDirection={sortDirection}
-          onSortDirectionChange={setSortDirection}
           totalCount={users.length}
           visibleCount={visibleUsers.length}
           canMutate={status === "ready" && !isMutating}
@@ -82,6 +88,9 @@ export function DashboardPage() {
           <UserList
             users={visibleUsers}
             disabled={isMutating}
+            sortField={sortField}
+            sortDirection={sortDirection}
+            onSort={handleSort}
             onDelete={setUserToDelete}
           />
         ) : null}

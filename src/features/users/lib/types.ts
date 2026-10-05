@@ -1,2 +1,2 @@
-export type SortField = "id" | "name" | "username"
+export type SortField = "name" | "email" | "company"
 export type SortDirection = "asc" | "desc"

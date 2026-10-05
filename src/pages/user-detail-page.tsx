@@ -2,7 +2,6 @@ import { ArrowLeftIcon, TriangleAlertIcon } from "lucide-react"
 import { useEffect } from "react"
 import { Link, useParams } from "react-router-dom"
 
-import { ThemeToggle } from "@/components/theme-toggle"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 import {
@@ -122,7 +121,6 @@ export function UserDetailPage() {
         <div className="mx-auto flex max-w-3xl flex-col gap-3 px-4 py-5 sm:px-6">
           <div className="flex items-center justify-between gap-3">
             <BackToUsers />
-            <ThemeToggle />
           </div>
           <div>
             <p className="text-sm text-muted-foreground">Directory</p>

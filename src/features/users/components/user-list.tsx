@@ -1,4 +1,4 @@
-import { Trash2Icon } from "lucide-react"
+import { ArrowDownIcon, ArrowUpDownIcon, ArrowUpIcon, Trash2Icon } from "lucide-react"
 import { Link } from "react-router-dom"
 
 import { Button } from "@/components/ui/button"
@@ -17,17 +17,93 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { cn } from "@/lib/utils"
 import type { User } from "@/features/users/lib/schema"
+import type { SortDirection, SortField } from "@/features/users/lib/types"
+
+const columns: { field: SortField; label: string }[] = [
+  { field: "name", label: "Name" },
+  { field: "email", label: "Email" },
+  { field: "company", label: "Company" },
+]
 
 type UserListProps = {
   users: readonly User[]
   disabled: boolean
+  sortField: SortField
+  sortDirection: SortDirection
+  onSort: (field: SortField) => void
   onDelete: (user: User) => void
 }
 
-export function UserList({ users, disabled, onDelete }: UserListProps) {
+type SortColumnButtonProps = {
+  field: SortField
+  label: string
+  sortField: SortField
+  sortDirection: SortDirection
+  onSort: (field: SortField) => void
+  className?: string
+}
+
+function SortColumnButton({
+  field,
+  label,
+  sortField,
+  sortDirection,
+  onSort,
+  className,
+}: SortColumnButtonProps) {
+  const active = sortField === field
+  const DirectionIcon = sortDirection === "asc" ? ArrowUpIcon : ArrowDownIcon
+
+  return (
+    <Button
+      type="button"
+      variant="ghost"
+      size="sm"
+      className={cn("-ml-2", className)}
+      aria-label={
+        active
+          ? `${label}, sorted ${sortDirection === "asc" ? "ascending" : "descending"}`
+          : `Sort by ${label}`
+      }
+      onClick={() => {
+        onSort(field)
+      }}
+    >
+      {label}
+      {active ? <DirectionIcon /> : <ArrowUpDownIcon className="text-muted-foreground" />}
+    </Button>
+  )
+}
+
+export function UserList({
+  users,
+  disabled,
+  sortField,
+  sortDirection,
+  onSort,
+  onDelete,
+}: UserListProps) {
   return (
     <>
+      <div
+        className="flex flex-wrap gap-1 md:hidden"
+        role="group"
+        aria-label="Sort users"
+      >
+        {columns.map((column) => (
+          <SortColumnButton
+            key={column.field}
+            field={column.field}
+            label={column.label}
+            sortField={sortField}
+            sortDirection={sortDirection}
+            onSort={onSort}
+            className="ml-0"
+          />
+        ))}
+      </div>
       <div className="flex flex-col gap-3 md:hidden">
         {users.map((user) => (
           <Card key={user.id} size="sm">
@@ -70,9 +146,27 @@ export function UserList({ users, disabled, onDelete }: UserListProps) {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="px-4">Name</TableHead>
-              <TableHead className="px-4">Email</TableHead>
-              <TableHead className="px-4">Company</TableHead>
+              {columns.map((column) => (
+                <TableHead
+                  key={column.field}
+                  className="px-4"
+                  aria-sort={
+                    sortField === column.field
+                      ? sortDirection === "asc"
+                        ? "ascending"
+                        : "descending"
+                      : "none"
+                  }
+                >
+                  <SortColumnButton
+                    field={column.field}
+                    label={column.label}
+                    sortField={sortField}
+                    sortDirection={sortDirection}
+                    onSort={onSort}
+                  />
+                </TableHead>
+              ))}
               <TableHead className="px-4 text-right">
                 <span className="sr-only">Actions</span>
               </TableHead>

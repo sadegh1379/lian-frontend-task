@@ -66,14 +66,20 @@ export function queryUsers(
   const direction = sortDirection === "asc" ? 1 : -1
 
   return filtered.sort((left, right) => {
-    if (sortField === "id") {
-      return (left.id - right.id) * direction
-    }
+    return compareSortValues(left, right, sortField) * direction
+  })
+}
 
-    return (
-      left[sortField].localeCompare(right[sortField], undefined, {
-        sensitivity: "base",
-      }) * direction
-    )
+function sortValue(user: User, sortField: SortField): string {
+  if (sortField === "company") {
+    return user.company.name
+  }
+
+  return user[sortField]
+}
+
+function compareSortValues(left: User, right: User, sortField: SortField): number {
+  return sortValue(left, sortField).localeCompare(sortValue(right, sortField), undefined, {
+    sensitivity: "base",
   })
 }
