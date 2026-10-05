@@ -1,6 +1,44 @@
 # User Dashboard
 
-A user dashboard built with React, TypeScript, and Vite. The user list comes from [JSONPlaceholder](https://jsonplaceholder.typicode.com/users). Search and sort run on the client, because the API does not support them. Add and delete are sent to the API, then stored in `localStorage` so they remain after refresh.
+A responsive user directory built with React, TypeScript, and Vite. It loads people from [JSONPlaceholder](https://jsonplaceholder.typicode.com/users) and lets you search, sort, add, and delete them in the browser.
+
+JSONPlaceholder does not filter, search, or sort on the server, and it does not keep writes. Those operations run on the client. Each add is sent with `POST` and each delete of a server user is sent with `DELETE`. The app then stores the change in `localStorage`, so the directory looks the same after a refresh.
+
+## What you can do
+
+The dashboard lists three fields for every user: name, user ID, and username. On a wide screen the list is a table. On a narrow screen it becomes stacked cards.
+
+- Search by name or user ID. Matching is case-insensitive and happens on the list already loaded in the browser.
+- Sort by user ID, name, or username, in ascending or descending order. The default is user ID, ascending.
+- Add a user. The form asks for name, username, and email, and checks them with React Hook Form and Zod before anything is sent.
+- Delete a user after a confirmation dialog. A user that came from the API is deleted remotely and remembered as removed. A user created in this browser is removed from local storage only, because that record does not exist on the server.
+
+New users get the next free numeric ID. Deleted server IDs are not reused, so a removed person does not reappear when the list is fetched again.
+
+## Screen states
+
+The page does not render an empty table while data is in flight.
+
+| State | What you see |
+| --- | --- |
+| Loading | Skeleton placeholders while the user list is requested |
+| Error | A message and a Retry button when the request fails |
+| Empty | A short explanation when every user has been removed |
+| No results | A clear-search action when the query matches nobody |
+| Ready | The filtered, sorted list |
+
+A status line under the list explains that local adds and deletes survive refresh.
+
+## Stack
+
+- React and TypeScript
+- Vite
+- Tailwind CSS
+- shadcn/ui
+- TanStack Query for loading users and for add/delete mutations
+- Zod for the API payload and the add-user form
+- React Hook Form for the add-user form
+- React Router for the app shell
 
 ## Run
 
@@ -23,24 +61,27 @@ npm run preview   # preview the production build
 
 ## Structure
 
+UI, data fetching, and list rules live in separate folders so the page mostly composes them.
+
 ```text
 src/
   main.tsx                 # app entry
   App.tsx                  # routing and QueryClientProvider
   pages/
-    dashboard-page.tsx     # dashboard page
+    dashboard-page.tsx     # dashboard page: search, sort, and screen states
   components/
     ui/                    # shadcn/ui components
-    users/                 # search, sort, list, add, and delete
+    users/                 # toolbar, list, dialogs, skeleton, empty and error views
   features/users/
-    api.ts                 # API requests
+    api.ts                 # fetch, create, and delete requests
     schema.ts              # user model and Zod validation
     use-users.ts           # TanStack Query reads and mutations
-    directory.ts           # client-side merge, search, and sort
-    storage.ts             # persist added and deleted users in localStorage
+    directory.ts           # merge remote users with local edits, then search and sort
+    storage.ts             # read and write added and deleted users in localStorage
+    query-keys.ts          # query keys for the remote list and local edits
   lib/
     query-client.ts        # TanStack Query setup
     utils.ts               # cn helper
 ```
 
-The page renders the states from `useUsers`: loading, error, empty list, and no search results. The add-user form is validated with React Hook Form and Zod.
+`useUsers` fetches the remote list, reads local edits, and returns one merged array. The dashboard page never calls `fetch` itself. Search text and sort choices stay in page state and are not written to storage.
