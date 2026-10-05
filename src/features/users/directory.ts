@@ -1,0 +1,79 @@
+import type { CreateUserInput, User, UserMutations } from "@/features/users/schema"
+import type { SortDirection, SortField } from "@/features/users/types"
+
+export function mergeUsers(
+  remoteUsers: readonly User[],
+  mutations: UserMutations,
+): User[] {
+  const deletedIds = new Set(mutations.deletedIds)
+  const remote = remoteUsers.filter((user) => !deletedIds.has(user.id))
+  const created = mutations.created.filter((user) => !deletedIds.has(user.id))
+
+  return [...remote, ...created]
+}
+
+export function nextUserId(
+  remoteUsers: readonly User[],
+  mutations: UserMutations,
+): number {
+  const ids = [
+    ...remoteUsers.map((user) => user.id),
+    ...mutations.created.map((user) => user.id),
+    ...mutations.deletedIds,
+  ]
+
+  return ids.reduce((maxId, id) => Math.max(maxId, id), 0) + 1
+}
+
+export function buildCreatedUser(id: number, input: CreateUserInput): User {
+  return {
+    id,
+    name: input.name,
+    username: input.username,
+    email: input.email,
+    phone: "",
+    website: "",
+    address: {
+      street: "",
+      suite: "",
+      city: "",
+      zipcode: "",
+      geo: { lat: "", lng: "" },
+    },
+    company: {
+      name: "",
+      catchPhrase: "",
+      bs: "",
+    },
+  }
+}
+
+export function queryUsers(
+  users: readonly User[],
+  query: string,
+  sortField: SortField,
+  sortDirection: SortDirection,
+): User[] {
+  const normalizedQuery = query.trim().toLowerCase()
+  const filtered = normalizedQuery
+    ? users.filter((user) => {
+        const nameMatches = user.name.toLowerCase().includes(normalizedQuery)
+        const idMatches = String(user.id).includes(normalizedQuery)
+        return nameMatches || idMatches
+      })
+    : [...users]
+
+  const direction = sortDirection === "asc" ? 1 : -1
+
+  return filtered.sort((left, right) => {
+    if (sortField === "id") {
+      return (left.id - right.id) * direction
+    }
+
+    return (
+      left[sortField].localeCompare(right[sortField], undefined, {
+        sensitivity: "base",
+      }) * direction
+    )
+  })
+}
