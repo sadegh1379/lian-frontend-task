@@ -1,4 +1,4 @@
-import type { User } from "@/features/users/schema"
+import type { User } from "@/features/users/lib/schema"
 
 export function formatAddress(address: User["address"]): string {
   const streetLine = [address.street, address.suite].filter(Boolean).join(", ")

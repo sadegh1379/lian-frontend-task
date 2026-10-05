@@ -27,7 +27,7 @@ import { Input } from "@/components/ui/input"
 import {
   createUserSchema,
   type CreateUserInput,
-} from "@/features/users/schema"
+} from "@/features/users/lib/schema"
 
 type AddUserDialogProps = {
   disabled: boolean

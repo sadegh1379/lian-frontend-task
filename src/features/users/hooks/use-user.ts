@@ -1,9 +1,10 @@
 import { useQuery } from "@tanstack/react-query"
 
-import { ApiError, fetchUser } from "@/features/users/api"
-import { userKeys } from "@/features/users/query-keys"
-import type { User } from "@/features/users/schema"
-import { readMutations } from "@/features/users/storage"
+import { fetchUser } from "@/features/users/api"
+import { ApiError } from "@/lib/http"
+import { userKeys } from "@/features/users/lib/query-keys"
+import type { User } from "@/features/users/lib/schema"
+import { readMutations } from "@/features/users/lib/storage"
 
 async function loadUser(id: number, signal?: AbortSignal): Promise<User> {
   const mutations = readMutations()

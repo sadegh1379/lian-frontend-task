@@ -10,10 +10,10 @@ import {
   buildCreatedUser,
   mergeUsers,
   nextUserId,
-} from "@/features/users/directory"
-import { userKeys } from "@/features/users/query-keys"
-import type { CreateUserInput, User, UserMutations } from "@/features/users/schema"
-import { readMutations, writeMutations } from "@/features/users/storage"
+} from "@/features/users/lib/directory"
+import { userKeys } from "@/features/users/lib/query-keys"
+import type { CreateUserInput, User, UserMutations } from "@/features/users/lib/schema"
+import { readMutations, writeMutations } from "@/features/users/lib/storage"
 
 type UsersStatus = "loading" | "error" | "ready"
 

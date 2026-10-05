@@ -1,34 +1,13 @@
+import { ApiError, request } from "@/lib/http"
+
 import {
   userListSchema,
   userSchema,
   type CreateUserInput,
   type User,
-} from "@/features/users/schema"
+} from "@/features/users/lib/schema"
 
 const usersEndpoint = "https://jsonplaceholder.typicode.com/users"
-
-export class ApiError extends Error {
-  constructor(message: string) {
-    super(message)
-    this.name = "ApiError"
-  }
-}
-
-function isAbortError(error: unknown): boolean {
-  return error instanceof DOMException && error.name === "AbortError"
-}
-
-async function request(url: string, init?: RequestInit): Promise<Response> {
-  try {
-    return await fetch(url, init)
-  } catch (error) {
-    if (isAbortError(error)) {
-      throw error
-    }
-
-    throw new ApiError("Network error. Check your connection and try again.")
-  }
-}
 
 export async function fetchUsers(signal?: AbortSignal): Promise<User[]> {
   const response = await request(usersEndpoint, { signal })

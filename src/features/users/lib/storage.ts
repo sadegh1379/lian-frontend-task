@@ -1,7 +1,7 @@
 import {
   userMutationsSchema,
   type UserMutations,
-} from "@/features/users/schema"
+} from "@/features/users/lib/schema"
 
 const storageKey = "lian.user-mutations"
 

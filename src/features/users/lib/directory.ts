@@ -1,5 +1,5 @@
-import type { CreateUserInput, User, UserMutations } from "@/features/users/schema"
-import type { SortDirection, SortField } from "@/features/users/types"
+import type { CreateUserInput, User, UserMutations } from "@/features/users/lib/schema"
+import type { SortDirection, SortField } from "@/features/users/lib/types"
 
 export function mergeUsers(
   remoteUsers: readonly User[],

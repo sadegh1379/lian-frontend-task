@@ -73,17 +73,13 @@ src/
     user-detail-page.tsx   # one user: loading, error, and a link back to the list
   components/
     ui/                    # shadcn/ui components
-    users/                 # toolbar, list, dialogs, skeleton, empty and error views
   features/users/
-    api.ts                 # fetch, create, and delete requests
-    schema.ts              # user model and Zod validation
-    use-users.ts           # TanStack Query reads and mutations
-    use-user.ts            # load one user by id
-    format-address.ts      # readable address line
-    directory.ts           # merge remote users with local edits, then search and sort
-    storage.ts             # read and write added and deleted users in localStorage
-    query-keys.ts          # query keys for the remote list and local edits
+    api/                   # fetch, create, and delete requests
+    components/            # list, toolbar, dialogs, skeleton, empty and error views
+    hooks/                 # TanStack Query hooks for the list and one user
+    lib/                   # schema, storage, search, sort, and address formatting
   lib/
+    http.ts                # shared request helper and ApiError
     query-client.ts        # TanStack Query setup
     utils.ts               # cn helper
 ```

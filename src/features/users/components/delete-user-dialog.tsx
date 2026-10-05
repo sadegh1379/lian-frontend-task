@@ -10,7 +10,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
-import type { User } from "@/features/users/schema"
+import type { User } from "@/features/users/lib/schema"
 
 type DeleteUserDialogProps = {
   user: User | null

@@ -1,6 +1,6 @@
 import { ArrowDownIcon, ArrowUpIcon, SearchIcon, XIcon } from "lucide-react"
 
-import { AddUserDialog } from "@/components/users/add-user-dialog"
+import { AddUserDialog } from "@/features/users/components/add-user-dialog"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import {
@@ -10,8 +10,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import type { CreateUserInput } from "@/features/users/schema"
-import type { SortDirection, SortField } from "@/features/users/types"
+import type { CreateUserInput } from "@/features/users/lib/schema"
+import type { SortDirection, SortField } from "@/features/users/lib/types"
 
 type UserToolbarProps = {
   query: string

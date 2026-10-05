@@ -17,7 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import type { User } from "@/features/users/schema"
+import type { User } from "@/features/users/lib/schema"
 
 type UserListProps = {
   users: readonly User[]

@@ -1,19 +1,19 @@
 import { UsersIcon } from "lucide-react"
 import { useMemo, useState } from "react"
 
-import { DeleteUserDialog } from "@/components/users/delete-user-dialog"
-import { UserList } from "@/components/users/user-list"
-import { UserListSkeleton } from "@/components/users/user-list-skeleton"
-import { UserToolbar } from "@/components/users/user-toolbar"
+import { DeleteUserDialog } from "@/features/users/components/delete-user-dialog"
+import { UserList } from "@/features/users/components/user-list"
+import { UserListSkeleton } from "@/features/users/components/user-list-skeleton"
+import { UserToolbar } from "@/features/users/components/user-toolbar"
 import {
   UsersEmptyState,
   UsersErrorState,
   UsersNoResults,
-} from "@/components/users/users-state"
-import { queryUsers } from "@/features/users/directory"
-import type { User } from "@/features/users/schema"
-import type { SortDirection, SortField } from "@/features/users/types"
-import { useUsers } from "@/features/users/use-users"
+} from "@/features/users/components/users-state"
+import { useUsers } from "@/features/users/hooks/use-users"
+import { queryUsers } from "@/features/users/lib/directory"
+import type { User } from "@/features/users/lib/schema"
+import type { SortDirection, SortField } from "@/features/users/lib/types"
 
 export function DashboardPage() {
   const { status, errorMessage, users, isMutating, reload, addUser, removeUser } =

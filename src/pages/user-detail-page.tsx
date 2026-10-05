@@ -12,9 +12,9 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
-import { formatAddress } from "@/features/users/format-address"
-import type { User } from "@/features/users/schema"
-import { useUser } from "@/features/users/use-user"
+import { useUser } from "@/features/users/hooks/use-user"
+import { formatAddress } from "@/features/users/lib/format-address"
+import type { User } from "@/features/users/lib/schema"
 
 function displayValue(value: string): string {
   const trimmed = value.trim()
