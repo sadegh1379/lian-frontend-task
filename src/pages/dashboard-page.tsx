@@ -1,6 +1,7 @@
 import { UsersIcon } from "lucide-react"
 import { useMemo, useState } from "react"
 
+import { ThemeToggle } from "@/components/theme-toggle"
 import { DeleteUserDialog } from "@/features/users/components/delete-user-dialog"
 import { UserList } from "@/features/users/components/user-list"
 import { UserListSkeleton } from "@/features/users/components/user-list-skeleton"
@@ -42,6 +43,9 @@ export function DashboardPage() {
             <h1 className="text-xl font-medium tracking-tight sm:text-2xl">
               Users
             </h1>
+          </div>
+          <div className="ml-auto">
+            <ThemeToggle />
           </div>
         </div>
       </header>
