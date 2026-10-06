@@ -9,7 +9,7 @@ JSONPlaceholder does not filter, search, or sort on the server, and it does not 
 The dashboard lists three fields for every user: name, email, and company name. On a wide screen the list is a table. On a narrow screen it becomes stacked cards.
 
 - Search by name or email. Matching is case-insensitive and happens on the list already loaded in the browser.
-- Sort by user ID, name, or username, in ascending or descending order. The default is user ID, ascending.
+- Sort from the Name, Email, and Company column headers. An arrow shows the active column and whether the order is ascending or descending. The default is name, ascending. Click a header to sort by it, and click it again to reverse the order.
 - Add a user. The form asks for name, email, and company name, and checks them with React Hook Form and Zod before anything is sent.
 - Open a user's details. The page loads that person from `GET /users/{id}` and shows name, username, email, phone, address, and company name. It has its own loading and error states, and a link back to the list. A user created in this browser is read from local storage, because the API does not keep that record.
 - Delete a user after a confirmation dialog. A user that came from the API is deleted remotely and remembered as removed. A user created in this browser is removed from local storage only, because that record does not exist on the server.
