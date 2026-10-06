@@ -1,8 +1,8 @@
-import { ArrowLeftIcon, TriangleAlertIcon } from "lucide-react"
+import { ArrowLeftIcon } from "lucide-react"
 import { useEffect } from "react"
 import { Link, useParams } from "react-router-dom"
 
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { ErrorState } from "@/components/states"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -39,28 +39,6 @@ function UserDetailSkeleton() {
       <Skeleton className="h-8 w-48" />
       <Skeleton className="h-72 w-full rounded-xl" />
     </div>
-  )
-}
-
-type UserDetailErrorProps = {
-  message: string
-  onRetry?: () => void
-}
-
-function UserDetailError({ message, onRetry }: UserDetailErrorProps) {
-  return (
-    <Alert variant="destructive">
-      <TriangleAlertIcon />
-      <AlertTitle>Could not load this user</AlertTitle>
-      <AlertDescription>{message}</AlertDescription>
-      {onRetry ? (
-        <div className="col-start-2 pt-2">
-          <Button type="button" variant="outline" size="sm" onClick={onRetry}>
-            Retry
-          </Button>
-        </div>
-      ) : null}
-    </Alert>
   )
 }
 
@@ -132,11 +110,15 @@ export function UserDetailPage() {
       </header>
       <main className="mx-auto flex w-full max-w-3xl flex-col gap-4 px-4 py-6 sm:px-6">
         {!isValidId ? (
-          <UserDetailError message="This user could not be found." />
+          <ErrorState
+            title="Could not load this user"
+            message="This user could not be found."
+          />
         ) : null}
         {isValidId && userQuery.isLoading ? <UserDetailSkeleton /> : null}
         {isValidId && userQuery.isError ? (
-          <UserDetailError
+          <ErrorState
+            title="Could not load this user"
             message={errorMessage}
             onRetry={() => {
               void userQuery.refetch()

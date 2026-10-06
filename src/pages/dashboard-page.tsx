@@ -1,16 +1,12 @@
 import { UsersIcon } from "lucide-react"
 import { useMemo, useState } from "react"
 
+import { EmptyState, ErrorState, NoResultsState } from "@/components/states"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { DeleteUserDialog } from "@/features/users/components/delete-user-dialog"
 import { UserList } from "@/features/users/components/user-list"
 import { UserListSkeleton } from "@/features/users/components/user-list-skeleton"
 import { UserToolbar } from "@/features/users/components/user-toolbar"
-import {
-  UsersEmptyState,
-  UsersErrorState,
-  UsersNoResults,
-} from "@/features/users/components/users-state"
 import { useUsers } from "@/features/users/hooks/use-users"
 import { queryUsers } from "@/features/users/lib/directory"
 import type { User } from "@/features/users/lib/schema"
@@ -70,15 +66,23 @@ export function DashboardPage() {
         />
         {status === "loading" ? <UserListSkeleton /> : null}
         {status === "error" ? (
-          <UsersErrorState
+          <ErrorState
+            title="Could not load users"
             message={errorMessage ?? "Could not load users. Try again."}
             onRetry={reload}
           />
         ) : null}
-        {status === "ready" && users.length === 0 ? <UsersEmptyState /> : null}
+        {status === "ready" && users.length === 0 ? (
+          <EmptyState
+            icon={UsersIcon}
+            title="No users"
+            description="The directory is empty. Add a user to see them here. Added users stay on this device after refresh."
+          />
+        ) : null}
         {status === "ready" && users.length > 0 && visibleUsers.length === 0 && hasQuery ? (
-          <UsersNoResults
-            query={query}
+          <NoResultsState
+            title="No matching users"
+            description={`Nothing matches “${query.trim()}”. Try another name or email.`}
             onClear={() => {
               setQuery("")
             }}
