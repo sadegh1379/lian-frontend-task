@@ -11,7 +11,7 @@ import {
   mergeUsers,
   nextUserId,
 } from "@/features/users/lib/directory"
-import { userKeys } from "@/features/users/lib/query-keys"
+import { userKeys } from "@/features/users/api/query-keys"
 import type { CreateUserInput, User, UserMutations } from "@/features/users/lib/schema"
 import { readMutations, writeMutations } from "@/features/users/lib/storage"
 
@@ -44,7 +44,7 @@ export function useUsers(): UseUsersResult {
   const queryClient = useQueryClient()
   const usersQuery = useQuery({
     queryKey: userKeys.remote,
-    queryFn: ({ signal }) => fetchUsers(signal),
+    queryFn: fetchUsers,
   })
   const mutationsQuery = useQuery({
     queryKey: userKeys.mutations,

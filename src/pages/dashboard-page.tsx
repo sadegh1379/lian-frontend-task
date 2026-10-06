@@ -10,7 +10,7 @@ import { UserToolbar } from "@/features/users/components/user-toolbar"
 import { useUsers } from "@/features/users/hooks/use-users"
 import { queryUsers } from "@/features/users/lib/directory"
 import type { User } from "@/features/users/lib/schema"
-import type { SortDirection, SortField } from "@/features/users/lib/types"
+import type { SortDirection, SortField } from "@/features/users/types"
 
 export function DashboardPage() {
   const { status, errorMessage, users, isMutating, reload, addUser, removeUser } =

@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/table"
 import { cn } from "@/lib/utils"
 import type { User } from "@/features/users/lib/schema"
-import type { SortDirection, SortField } from "@/features/users/lib/types"
+import type { SortDirection, SortField } from "@/features/users/types"
 
 const columns: { field: SortField; label: string }[] = [
   { field: "name", label: "Name" },

@@ -9,8 +9,8 @@ import {
 
 const usersEndpoint = "https://jsonplaceholder.typicode.com/users"
 
-export async function fetchUsers(signal?: AbortSignal): Promise<User[]> {
-  const response = await request(usersEndpoint, { signal })
+export async function fetchUsers(): Promise<User[]> {
+  const response = await request(usersEndpoint)
 
   if (!response.ok) {
     throw new ApiError("Could not load users. Try again.")
@@ -26,8 +26,8 @@ export async function fetchUsers(signal?: AbortSignal): Promise<User[]> {
   return parsed.data
 }
 
-export async function fetchUser(id: number, signal?: AbortSignal): Promise<User> {
-  const response = await request(`${usersEndpoint}/${id}`, { signal })
+export async function fetchUser(id: number): Promise<User> {
+  const response = await request(`${usersEndpoint}/${id}`)
 
   if (response.status === 404) {
     throw new ApiError("This user could not be found.")
