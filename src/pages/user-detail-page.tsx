@@ -1,5 +1,4 @@
 import { ArrowLeftIcon } from "lucide-react"
-import { useEffect } from "react"
 import { Link, useParams } from "react-router-dom"
 
 import { ErrorState } from "@/components/states"
@@ -81,12 +80,6 @@ export function UserDetailPage() {
   const userQuery = useUser(id, isValidId)
   const user = userQuery.data
 
-  useEffect(() => {
-    document.title = user ? `${user.name} · Users` : "User details"
-    return () => {
-      document.title = "Users"
-    }
-  }, [user])
 
   const errorMessage =
     userQuery.error instanceof Error

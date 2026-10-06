@@ -8,6 +8,7 @@ import type { CreateUserInput } from "@/features/users/lib/schema"
 type UserToolbarProps = {
   query: string
   onQueryChange: (query: string) => void
+  filterQuery: string
   totalCount: number
   visibleCount: number
   canMutate: boolean
@@ -17,13 +18,14 @@ type UserToolbarProps = {
 export function UserToolbar({
   query,
   onQueryChange,
+  filterQuery,
   totalCount,
   visibleCount,
   canMutate,
   onAdd,
 }: UserToolbarProps) {
   const countLabel =
-    query.trim().length > 0
+    filterQuery.trim().length > 0
       ? `${visibleCount} of ${totalCount} users`
       : `${totalCount} users`
 

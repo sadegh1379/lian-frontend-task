@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query"
 
 import { fetchUser } from "@/features/users/api"
 import { ApiError } from "@/lib/http"
-import { userKeys } from "@/features/users/api/query-keys"
+import { userKeys } from "@/features/users/lib/query-keys"
 import type { User } from "@/features/users/lib/schema"
 import { readMutations } from "@/features/users/lib/storage"
 
