@@ -1,19 +1,17 @@
 import { UsersIcon } from "lucide-react"
 import { useMemo, useState } from "react"
 
-import { EmptyState, ErrorState, NoResultsState } from "@/components/states"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { DeleteUserDialog } from "@/features/users/components/delete-user-dialog"
-import { UserList } from "@/features/users/components/user-list"
-import { UserListSkeleton } from "@/features/users/components/user-list-skeleton"
-import { UserToolbar } from "@/features/users/components/user-toolbar"
-import { useDebouncedValue } from "@/features/users/hooks/use-debounced-value"
-import { useUsers } from "@/features/users/hooks/use-users"
+import { EmptyState, ErrorState, NoResultsState } from "@/shared/ui/states"
+import { ThemeToggle } from "@/shared/ui/ThemeToggle"
+import { DeleteUserDialog } from "@/features/users/components/DeleteUserDialog"
+import { UserList } from "@/features/users/components/UserList"
+import { UserListSkeleton } from "@/features/users/components/UserListSkeleton"
+import { UserToolbar } from "@/features/users/components/UserToolbar"
+import { searchDebounceMs } from "@/features/users/constants"
+import { useUsers } from "@/features/users/hooks/useUsers"
 import { queryUsers } from "@/features/users/lib/directory"
-import type { User } from "@/features/users/lib/schema"
-import type { SortDirection, SortField } from "@/features/users/types"
-
-const searchDebounceMs = 300
+import type { SortDirection, SortField, User } from "@/features/users/types"
+import { useDebouncedValue } from "@/shared/hooks/useDebouncedValue"
 
 export function DashboardPage() {
   const { status, errorMessage, users, isMutating, reload, addUser, removeUser } =

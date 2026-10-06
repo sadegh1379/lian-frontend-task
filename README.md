@@ -66,22 +66,20 @@ UI, data fetching, and list rules live in separate folders so the page mostly co
 
 ```text
 src/
-  main.tsx                 # app entry
-  App.tsx                  # routing and QueryClientProvider
-  pages/
-    dashboard-page.tsx     # dashboard page: search, sort, and screen states
-    user-detail-page.tsx   # one user: loading, error, and a link back to the list
-  components/
-    ui/                    # shadcn/ui components
+  main.tsx
+  app/                     # routes, providers, query client
+  pages/                   # screens that compose a feature
   features/users/
-    api/                   # fetch, create, and delete requests
-    components/            # list, toolbar, dialogs, skeleton, empty and error views
-    hooks/                 # TanStack Query hooks for the list and one user
-    lib/                   # schema, storage, search, sort, and address formatting
-  lib/
-    http.ts                # shared request helper and ApiError
-    query-client.ts        # TanStack Query setup
-    utils.ts               # cn helper
+    api/                   # requests and query keys
+    components/
+    hooks/
+    lib/                   # schema, storage, search, sort, address
+    constants.ts
+    types.ts
+  shared/
+    hooks/                 # debounce
+    lib/                   # http helper and cn
+    ui/                    # shadcn/ui and shared screen states
 ```
 
 `useUsers` fetches the remote list, reads local edits, and returns one merged array. The dashboard page never calls `fetch` itself. Search text and sort choices stay in page state and are not written to storage.

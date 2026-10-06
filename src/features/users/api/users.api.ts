@@ -1,13 +1,10 @@
-import { ApiError, request } from "@/lib/http"
-
+import { usersEndpoint } from "@/features/users/constants"
+import type { CreateUserInput, User } from "@/features/users/types"
 import {
   userListSchema,
   userSchema,
-  type CreateUserInput,
-  type User,
 } from "@/features/users/lib/schema"
-
-const usersEndpoint = "https://jsonplaceholder.typicode.com/users"
+import { ApiError, request } from "@/shared/lib/http"
 
 export async function fetchUsers(): Promise<User[]> {
   const response = await request(usersEndpoint)

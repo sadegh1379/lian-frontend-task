@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/shared/ui/button"
 import {
   Dialog,
   DialogClose,
@@ -14,7 +14,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
+} from "@/shared/ui/dialog"
 import {
   Form,
   FormControl,
@@ -22,12 +22,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import {
-  createUserSchema,
-  type CreateUserInput,
-} from "@/features/users/lib/schema"
+} from "@/shared/ui/form"
+import { Input } from "@/shared/ui/input"
+import { createUserSchema } from "@/features/users/lib/schema"
+import type { CreateUserInput } from "@/features/users/types"
 
 type AddUserDialogProps = {
   disabled: boolean

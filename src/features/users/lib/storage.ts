@@ -1,9 +1,6 @@
-import {
-  userMutationsSchema,
-  type UserMutations,
-} from "@/features/users/lib/schema"
-
-const storageKey = "lian.user-mutations"
+import { userMutationsStorageKey } from "@/features/users/constants"
+import { userMutationsSchema } from "@/features/users/lib/schema"
+import type { UserMutations } from "@/features/users/types"
 
 const emptyMutations: UserMutations = {
   created: [],
@@ -12,7 +9,7 @@ const emptyMutations: UserMutations = {
 
 export function readMutations(): UserMutations {
   try {
-    const raw = localStorage.getItem(storageKey)
+    const raw = localStorage.getItem(userMutationsStorageKey)
 
     if (!raw) {
       return emptyMutations
@@ -26,5 +23,5 @@ export function readMutations(): UserMutations {
 }
 
 export function writeMutations(mutations: UserMutations): void {
-  localStorage.setItem(storageKey, JSON.stringify(mutations))
+  localStorage.setItem(userMutationsStorageKey, JSON.stringify(mutations))
 }

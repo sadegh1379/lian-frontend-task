@@ -6,14 +6,14 @@ import {
   AlertAction,
   AlertDescription,
   AlertTitle,
-} from "@/components/ui/alert"
-import { Button } from "@/components/ui/button"
+} from "@/shared/ui/alert"
+import { Button } from "@/shared/ui/button"
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/shared/ui/card"
 
 type ErrorStateProps = {
   title: string

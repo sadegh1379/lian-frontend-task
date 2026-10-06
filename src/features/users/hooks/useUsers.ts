@@ -5,14 +5,14 @@ import {
   createUserRequest,
   deleteUserRequest,
   fetchUsers,
-} from "@/features/users/api"
+} from "@/features/users/api/users.api"
 import {
   buildCreatedUser,
   mergeUsers,
   nextUserId,
 } from "@/features/users/lib/directory"
-import { userKeys } from "@/features/users/lib/query-keys"
-import type { CreateUserInput, User, UserMutations } from "@/features/users/lib/schema"
+import { userKeys } from "@/features/users/api/users.keys"
+import type { CreateUserInput, User, UserMutations } from "@/features/users/types"
 import { readMutations, writeMutations } from "@/features/users/lib/storage"
 
 type UsersStatus = "loading" | "error" | "ready"

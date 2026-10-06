@@ -1,19 +1,19 @@
 import { ArrowLeftIcon } from "lucide-react"
 import { Link, useParams } from "react-router-dom"
 
-import { ErrorState } from "@/components/states"
-import { Button } from "@/components/ui/button"
+import { ErrorState } from "@/shared/ui/states"
+import { Button } from "@/shared/ui/button"
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Skeleton } from "@/components/ui/skeleton"
-import { useUser } from "@/features/users/hooks/use-user"
-import { formatAddress } from "@/features/users/lib/format-address"
-import type { User } from "@/features/users/lib/schema"
+} from "@/shared/ui/card"
+import { Skeleton } from "@/shared/ui/skeleton"
+import { useUser } from "@/features/users/hooks/useUser"
+import { formatAddress } from "@/features/users/lib/formatAddress"
+import type { User } from "@/features/users/types"
 
 function displayValue(value: string): string {
   const trimmed = value.trim()

@@ -1,14 +1,14 @@
 import { ArrowDownIcon, ArrowUpDownIcon, ArrowUpIcon, Trash2Icon } from "lucide-react"
 import { Link } from "react-router-dom"
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/shared/ui/button"
 import {
   Card,
   CardAction,
   CardContent,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/shared/ui/card"
 import {
   Table,
   TableBody,
@@ -16,10 +16,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { cn } from "@/lib/utils"
-import type { User } from "@/features/users/lib/schema"
-import type { SortDirection, SortField } from "@/features/users/types"
+} from "@/shared/ui/table"
+import { cn } from "@/shared/lib/utils"
+import type { SortDirection, SortField, User } from "@/features/users/types"
 
 const columns: { field: SortField; label: string }[] = [
   { field: "name", label: "Name" },

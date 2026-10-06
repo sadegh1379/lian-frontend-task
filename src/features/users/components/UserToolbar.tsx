@@ -1,9 +1,9 @@
 import { SearchIcon, XIcon } from "lucide-react"
 
-import { AddUserDialog } from "@/features/users/components/add-user-dialog"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import type { CreateUserInput } from "@/features/users/lib/schema"
+import { AddUserDialog } from "@/features/users/components/AddUserDialog"
+import { Button } from "@/shared/ui/button"
+import { Input } from "@/shared/ui/input"
+import type { CreateUserInput } from "@/features/users/types"
 
 type UserToolbarProps = {
   query: string

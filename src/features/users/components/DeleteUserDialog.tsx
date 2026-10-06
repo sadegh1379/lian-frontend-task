@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { toast } from "sonner"
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/shared/ui/button"
 import {
   Dialog,
   DialogContent,
@@ -9,8 +9,8 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog"
-import type { User } from "@/features/users/lib/schema"
+} from "@/shared/ui/dialog"
+import type { User } from "@/features/users/types"
 
 type DeleteUserDialogProps = {
   user: User | null
